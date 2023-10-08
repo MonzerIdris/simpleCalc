@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculator</title>
+</head>
+<body>
+  <h1>Number of Packs</h1>
+
+  <input type="number" id="num1" placeholder="incremental quantity">
+  
+  <input type="number" id="num2" placeholder="num of products in 1 pack">
+  
+  <button onclick="divide()">calculate</button>
+  <p id="divisionResult"></p>
+
+
+  <h2>packs needed:</h2>
+    <label for="price">Price:</label>
+    <input type="number" id="price" placeholder="Enter price">
+
+    <label for="numOfPacksForX">Number of Packs:</label>
+    <input type="number" id="numOfPacksForX" placeholder="Enter number of packs">
+
+    <button onclick="calculateX()">Calculate </button>
+  <p id="xResult"></p><p id="totalPacks"></p> 
+
+  <h2>full price:</h2>
+    <label for="pricex">Price:</label>
+    <input type="number" id="pricex" placeholder="Enter price">
+
+    <label for="numOfPacksFor">Number of Packs:</label>
+    <input type="number" id="numOfPacksFor" placeholder="Enter number of packs">
+
+    <label for="packsNeeded">packs needed:</label>
+    <input type="number" id="packsNeeded" placeholder="Enter number of packs needed">
+
+    <button onclick="theFullPrice()">Calculate </button>
+  <p id="fullResult"></p> 
+
+  <script>
+    function divide() {
+      const num1Input = document.getElementById("num1");
+      const num2Input = document.getElementById("num2");
+      const divisionResultOutput = document.getElementById("divisionResult");
+
+      const num1 = parseFloat(num1Input.value);
+      const num2 = parseFloat(num2Input.value);
+
+      if (isNaN(num1) || isNaN(num2)) {
+        divisionResultOutput.textContent = "Please enter valid numbers.";
+        return;
+      }
+
+      if (num2 === 0) {
+        divisionResultOutput.textContent = "Division by zero is not allowed.";
+        return;
+      }
+
+      const result = num1 / num2;
+      divisionResultOutput.textContent = `Result (number of packs): ${result}`;
+      return result;
+    }
+
+
+
+    function calculateX() {
+      const priceInput = document.getElementById("price");
+      const numOfPacksInput = document.getElementById("numOfPacksForX");
+      const xResultOutput = document.getElementById("xResult");
+      const totalPacksOutput = document.getElementById('totalPacks')
+
+      const price = parseFloat(priceInput.value);
+      const numOfPacks = parseFloat(numOfPacksInput.value);
+
+      if (isNaN(price) || isNaN(numOfPacks)) {
+        xResultOutput.textContent = "Please enter valid numbers.";
+        return;
+      }
+
+      let x = 400 / (price * numOfPacks);
+      x = Math.ceil(x); // Round to 2 decimal places
+
+      let sum = x * numOfPacks
+
+      xResultOutput.textContent = `packs needed = ${x}`;
+      totalPacksOutput.textContent = `total packs = ${sum}`
+    }
+
+    function theFullPrice() {
+      const inputPrice = document.getElementById("pricex");
+      const inputNumOfPacks = document.getElementById("numOfPacksFor");
+      const packsNeeded = document.getElementById("packsNeeded");
+      const fullResult = document.getElementById('fullResult')
+
+      const price = parseFloat(inputPrice.value);
+      const numOfPacks = parseFloat(inputNumOfPacks.value);
+      const packs = parseFloat(packsNeeded.value);
+
+      if (isNaN(price) || isNaN(numOfPacks) || isNaN(packs)) {
+        fullResult.textContent = "Please enter valid numbers.";
+        return;
+      }
+
+      let x = price * numOfPacks * packs;
+
+      fullResult.textContent = `price = ${x}`;
+    }
+  </script>
+</body>
+</html>
